@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>五星好评</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="../jquery-3.5.1.js"></script>
+</head>
+
+<style>
+    ul{
+        list-style-type: none;
+    }
+    li{
+        float: left;
+        margin-left: 15px;
+        font-size: 60px;
+        font-family: "simsun";
+        cursor: pointer;
+    }
+    div{
+        clear: both;
+    }
+    button{
+        margin-left: 70px;
+        font-size:30px;
+    }
+</style>
+
+<script>
+
+    $(function(){
+
+        var emptyStar="☆";
+        var fullStar="★";
+
+        $("li").mouseenter(function(){
+            $(this).text(fullStar).prevAll().text(fullStar).end().nextAll().text(emptyStar);
+        });
+
+        $("li").mouseleave(function(){
+            $("li").text(emptyStar);
+            $("li.current").text(fullStar).prevAll().text(fullStar).end().nextAll().text(emptyStar);
+
+        });
+
+        $("li").click(function(){
+            if($(this).hasClass("current")){
+                $(this).removeAttr("class");
+            }else{
+                $(this).attr("class","current").siblings().removeAttr("class");
+            }
+        })
+
+        $("button").click(function(){
+            var boo=false;
+            for(var i=0;i<$("ul>li").length;i++){
+                if($("ul>li").hasClass("current")){
+                    boo=true;
+                }
+            }
+            if(boo){
+                alert("分数："+($("ul>li.current").index()+1)+"分");
+            }else{
+                return alert("您还没有选择呢！");
+            }
+        })
+    })
+</script>
+<body>
+<ul class="box">
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+</ul>
+<div>
+    <button>提交</button>
+</div>
+</body>
+</html>
